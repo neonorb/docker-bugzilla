@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER Amer Child <achild@basis.com>
+MAINTAINER Neon Orb <neonorb@neonorb.com>
 
 # Update and install modules for bugzilla, Apache2
 RUN apt-get update && \
@@ -26,8 +26,8 @@ RUN rm -rf /var/www/html
 
 # Make Bugzilla install Directory
 ADD https://ftp.mozilla.org/pub/mozilla.org/webtools/bugzilla-4.4.8.tar.gz /tmp/
-RUN tar -xvf /tmp/bugzilla-4.4.8.tar.gz -C /var/www/
-RUN ln -s /var/www/bugzilla-4.4.8 /var/www/html
+RUN tar -xvf /tmp/bugzilla-*.tar.gz -C /var/www/
+RUN ln -s /var/www/bugzilla-* /var/www/html
 ADD bugzilla.conf /etc/apache2/sites-available/
 WORKDIR /var/www/html
 
