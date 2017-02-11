@@ -1,20 +1,12 @@
 #!/bin/sh
 
-# Set up bugzilla and run apache2
-cd /var/www/html
+chown -R www-data:www-data /var/www/html
 
-# Remove voting disable file
-rm -f extensions/Voting/disabled
-
-# Verify bugzilla setup
+cd /var/www/html/
 ./checksetup.pl
 
-# Change ownership
-chown -R www-data:www-data .
+service apache2 start
 
-# Remove stall pid file
-rm -f /var/run/apache2/apache2.pid
+./jobqueue.pl start
 
-# Start apache2
-. /etc/apache2/envvars
-/usr/sbin/apache2 -D FOREGROUND
+tail -F /var/log/apache2/*
